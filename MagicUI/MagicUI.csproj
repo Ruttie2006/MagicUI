@@ -82,7 +82,7 @@
       <EmbeddedResource Include="Resources\Underline-2.png" />
     </ItemGroup>
     <ItemGroup>
-        <Reference Include="Assembly-CSharp">
+        <!--<Reference Include="Assembly-CSharp">
             <HintPath>$(HollowKnightRefs)/Assembly-CSharp.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp-firstpass">
@@ -90,18 +90,6 @@
         </Reference>
         <Reference Include="GalaxyCSharp">
             <HintPath>$(HollowKnightRefs)/GalaxyCSharp.dll</HintPath>
-        </Reference>
-        <Reference Include="MMHOOK_Assembly-CSharp">
-            <HintPath>$(HollowKnightRefs)/MMHOOK_Assembly-CSharp.dll</HintPath>
-        </Reference>
-        <Reference Include="MMHOOK_PlayMaker">
-            <HintPath>$(HollowKnightRefs)/MMHOOK_PlayMaker.dll</HintPath>
-        </Reference>
-        <Reference Include="Mono.Cecil">
-            <HintPath>$(HollowKnightRefs)/Mono.Cecil.dll</HintPath>
-        </Reference>
-        <Reference Include="Mono.Security">
-            <HintPath>$(HollowKnightRefs)/Mono.Security.dll</HintPath>
         </Reference>
         <Reference Include="MonoMod.RuntimeDetour">
             <HintPath>$(HollowKnightRefs)/MonoMod.RuntimeDetour.dll</HintPath>
@@ -112,12 +100,9 @@
         <Reference Include="netstandard">
             <HintPath>$(HollowKnightRefs)/netstandard.dll</HintPath>
         </Reference>
-        <Reference Include="Newtonsoft.Json">
-            <HintPath>$(HollowKnightRefs)/Newtonsoft.Json.dll</HintPath>
-        </Reference>
         <Reference Include="PlayMaker">
             <HintPath>$(HollowKnightRefs)/PlayMaker.dll</HintPath>
-        </Reference>
+        </Reference>-->
         <Reference Include="System.ComponentModel.Composition">
             <HintPath>$(HollowKnightRefs)/System.ComponentModel.Composition.dll</HintPath>
         </Reference>
@@ -141,9 +126,6 @@
         </Reference>
         <Reference Include="System.Runtime.Serialization.Xml">
             <HintPath>$(HollowKnightRefs)/System.Runtime.Serialization.Xml.dll</HintPath>
-        </Reference>
-        <Reference Include="System.ServiceModel.Internals">
-            <HintPath>$(HollowKnightRefs)/System.ServiceModel.Internals.dll</HintPath>
         </Reference>
         <Reference Include="System.Transactions">
             <HintPath>$(HollowKnightRefs)/System.Transactions.dll</HintPath>

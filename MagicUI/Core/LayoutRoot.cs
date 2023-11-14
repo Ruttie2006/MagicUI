@@ -1,5 +1,4 @@
-﻿using InControl;
-using MagicUI.Behaviours;
+﻿using MagicUI.Behaviours;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,22 +120,6 @@ namespace MagicUI.Core
         }
 
         /// <summary>
-        /// Creates a new layout root
-        /// </summary>
-        /// <param name="persist">Whether the layout will persist across scene transitions</param>
-        /// <param name="pauseOnly">Whether the layout will be visible only while the game is paused</param>
-        /// <param name="name">The name of the layout root and underlying canvas</param>
-        [Obsolete("This constructor provides a flag to set the layout conditionally visible while the game is paused. Please use the (string, bool) constructor "
-            + "and VisibilityCondition property instead. You can set VisibilityCondition to GameManager.instance.IsGamePaused for equivalent behavior.")]
-        public LayoutRoot(bool persist, bool pauseOnly, string name = "New LayoutRoot") : this(persist, name)
-        {
-            if (pauseOnly)
-            {
-                VisibilityCondition = GameManager.instance.IsGamePaused;
-            }
-        }
-
-        /// <summary>
         /// Initializes a hotkey listener that performs an action when a given key combination is pressed
         /// </summary>
         /// <param name="key">The keypress to listen for</param>
@@ -158,7 +141,7 @@ namespace MagicUI.Core
         /// <param name="playerAction">The PlayerAction to bind to</param>
         /// <param name="execute">The action to perform when the PlayerAction is pressed</param>
         /// <param name="condition">The condition in which this action should be enabled</param>
-        public void ListenForPlayerAction(PlayerAction playerAction, Action execute, Func<bool>? condition = null)
+        public void ListenForPlayerAction(KeyCode playerAction, Action execute, Func<bool>? condition = null)
         {
             PlayerActionListener listener = rootCanvas.AddComponent<PlayerActionListener>();
             listener.playerAction = playerAction;

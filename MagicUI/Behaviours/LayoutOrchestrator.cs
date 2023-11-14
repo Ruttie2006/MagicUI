@@ -1,5 +1,4 @@
 ﻿using MagicUI.Core;
-using MagicUI.Core.Internal;
 using MagicUI.Graphics.Internal;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +8,6 @@ namespace MagicUI.Behaviours
 {
     internal class LayoutOrchestrator : MonoBehaviour
     {
-        private static readonly SettingsBoundLogger log = LogHelper.GetLogger();
-
         private readonly List<ArrangableElement> elements = new();
         private readonly Dictionary<string, List<ArrangableElement>> elementLookup = new();
 
@@ -114,22 +111,18 @@ namespace MagicUI.Behaviours
                 .Where(x => x.LogicalParent == null && !x.MeasureIsValid);
             foreach (ArrangableElement element in elementsToRemeasure)
             {
-                log.Log($"Measure/Arrange starting for {element.Name} of type {element.GetType().Name}");
                 // tree roots should always be top-level stuff - we'll allocate the entire screen size for arrangement
                 // and allow them to go where they need to go.
                 element.Measure();
                 element.Arrange(UI.Screen);
-                log.Log($"Measure/Arrange completed for {element.Name}");
             }
 
             IEnumerable<ArrangableElement> elementsToRearrange = elements
                 .Where(x => x.MeasureIsValid && !x.ArrangeIsValid); // ensure the element has been measured before arranging
             foreach (ArrangableElement element in elementsToRearrange)
             {
-                log.Log($"Arrange starting for {element.Name} of type {element.GetType().Name}");
                 // an invalidated arrange indicates the element wants to place itself in a different location within the same available space.
                 element.Arrange(element.PlacementRect);
-                log.Log($"Arrange completed for {element.Name}");
             }
         }
 
@@ -142,7 +135,7 @@ namespace MagicUI.Behaviours
 
         private void DrawRect(Rect rect, Color color)
         {
-            float width = Mathf.Max(1, GetComponent<Canvas>().transform.GetScaleX());
+            float width = Mathf.Max(1, GetComponent<Canvas>().transform.localScale.x);
 
             float left = rect.xMin;
             float right = rect.xMax;

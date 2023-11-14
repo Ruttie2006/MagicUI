@@ -1,18 +1,17 @@
-﻿using InControl;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace MagicUI.Behaviours
 {
     internal class PlayerActionListener : MonoBehaviour
     {
-        public PlayerAction? playerAction;
+        public KeyCode? playerAction;
         public Func<bool>? enableCondition;
         public Action? execute;
         private bool previousPressedState = false;
 
         private bool CurrentPressedState() {
-            return playerAction?.IsPressed ?? false;
+            return playerAction == null ? false : Input.GetKeyDown(playerAction.Value);
         }
 
         private void Update()

@@ -1,5 +1,4 @@
-﻿using Modding;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MagicUI.Core
 {

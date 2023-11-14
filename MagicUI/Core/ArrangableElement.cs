@@ -1,5 +1,4 @@
-﻿using MagicUI.Core.Internal;
-using MagicUI.Styles;
+﻿using MagicUI.Styles;
 using System;
 using UnityEngine;
 
@@ -11,8 +10,6 @@ namespace MagicUI.Core
     [Stylable]
     public abstract class ArrangableElement
     {
-        private static readonly SettingsBoundLogger log = LogHelper.GetLogger();
-
         /// <summary>
         /// The visual layout parent of this element
         /// </summary>
@@ -256,10 +253,10 @@ namespace MagicUI.Core
             };
 
             Vector2 vec = new(x, y);
-            if (!ArrangeIsValid)
+            /*if (!ArrangeIsValid)
             {
                 log.Log($"{Name} top-left corner aligned and adjusted to {vec}");
-            }
+            }*/
             return vec;
         }
 
@@ -270,7 +267,6 @@ namespace MagicUI.Core
         {
             if (!MeasureIsValid)
             {
-                log.Log($"Measure triggered for {Name}");
                 ContentSize = MeasureOverride();
                 EffectiveSize = ContentSize + new Vector2(Padding.AddedWidth, Padding.AddedHeight);
                 if (Visibility == Visibility.Collapsed)
@@ -279,7 +275,6 @@ namespace MagicUI.Core
                 }
                 MeasureIsValid = true;
                 InvalidateArrange();
-                log.Log($"Computed {Name} size as {EffectiveSize}, adjusted from {ContentSize}");
             }
             return EffectiveSize;
         }
@@ -298,7 +293,6 @@ namespace MagicUI.Core
             // only rearrange if we're put into a new space, changing visibility, or explicitly told to rearrange.
             if (!ArrangeIsValid || EffectiveVisibilityMayChange || PlacementRect != availableSpace)
             {
-                log.Log($"Arrange triggered for {Name} in {availableSpace}");
                 PlacementRect = availableSpace;
                 ArrangeOverride(GetAlignedTopLeftCorner(availableSpace));
                 ArrangeIsValid = true;
@@ -325,7 +319,6 @@ namespace MagicUI.Core
         {
             if (!DestroyInProgress)
             {
-                log.Log($"Destroy triggered for {Name}");
                 DestroyInProgress = true;
                 // don't waste measure/arrange time on me while i'm destroying myself
                 MeasureIsValid = true;

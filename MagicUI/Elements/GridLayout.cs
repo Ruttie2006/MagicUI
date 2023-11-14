@@ -1,5 +1,4 @@
 ﻿using MagicUI.Core;
-using MagicUI.Core.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,8 +62,6 @@ namespace MagicUI.Elements
     /// </remarks>
     public class GridLayout : Layout
     {
-        private static readonly SettingsBoundLogger log = LogHelper.GetLogger();
-
         private static bool PositiveIntValidator(int x) => x > 0;
         private static bool UintValidator(int x) => x >= 0;
 
@@ -169,12 +166,10 @@ namespace MagicUI.Elements
             if (rowDefs.Count == 0)
             {
                 rowDefs.Add(new GridDimension(0, GridUnit.AbsoluteMin));
-                MagicUIMod.Instance.LogDebug($"Adding default min-size row def to {Name}");
             }
             if (colDefs.Count == 0)
             {
                 colDefs.Add(new GridDimension(0, GridUnit.AbsoluteMin));
-                MagicUIMod.Instance.LogDebug($"Adding default min-size column def to {Name}");
             }
 
             rowSizes = new float[rowDefs.Count];
@@ -231,14 +226,6 @@ namespace MagicUI.Elements
                 }
             }
 
-            log.Log($"Grid property precompute");
-            log.Log($"Rows: {string.Join(", ", rowDefs)}");
-            log.Log($"Row sizes: {string.Join(", ", rowSizes)}");
-            log.Log($"Row proportions: {string.Join(", ", rowProportions)}");
-            log.Log($"Cols: {string.Join(", ", colDefs)}");
-            log.Log($"Col sizes: {string.Join(", ", colSizes)}");
-            log.Log($"Col proportions: {string.Join(", ", colProportions)}");
-
             // measure each child and sort it in a way that we can access each child of a given row/column easily. for children that span
             // multiple rows/columns, include it in both/all.
             foreach (ArrangableElement child in Children)
@@ -260,10 +247,6 @@ namespace MagicUI.Elements
                     colSizes[i] = Math.Max(colSizes[i], size.x / colSpan);
                 }
             }
-
-            log.Log($"Grid property post child measure");
-            log.Log($"Row sizes: {string.Join(", ", rowSizes)}");
-            log.Log($"Col sizes: {string.Join(", ", colSizes)}");
 
             // so each child is accessible by the rows and columns it occupies, and the width/height of each absolutemin col/row is computed.
             // now we still need to handle proportional rows/columns
@@ -290,10 +273,6 @@ namespace MagicUI.Elements
 
             float requiredWidth = colSizes.Sum();
             float requiredHeight = rowSizes.Sum();
-
-            log.Log($"Grid property post resolve proportions");
-            log.Log($"Row sizes: {string.Join(", ", rowSizes)}");
-            log.Log($"Col sizes: {string.Join(", ", colSizes)}");
 
             float remainingWidth = minWidth - requiredWidth;
             if (remainingWidth > 0)
@@ -331,10 +310,6 @@ namespace MagicUI.Elements
                     rowSizes[row] += sizePerRow;
                 }
             }
-
-            log.Log($"Grid property post fill space");
-            log.Log($"Row sizes: {string.Join(", ", rowSizes)}");
-            log.Log($"Col sizes: {string.Join(", ", colSizes)}");
 
             return new Vector2(colSizes.Sum(), rowSizes.Sum());
         }
